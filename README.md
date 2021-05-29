@@ -28,17 +28,19 @@ Configuração do Workspace:
 - Create Github account and project
 - Clone Github project
 - [SpringBoot Initializer](https://start.spring.io/)
-- Build Maven no Terminal
-```
-mvn clean package
-```
 - IntelliJ: Setup SDK
 - Change IDE Java: Help > Find Action > Switch Boot JDK
+- Add pom.xml as Maven project
 - Run application
-```
-mvn spring-boot:run
-```
 - First commit
+
+# Session 2 
+- Create SQL objects
+- Setup in-memory database
+- Setup REST API
+- Add as Maven project
+- Hello world controller
+- Understanding the Swagger contract
 
 # References
 
