@@ -1,5 +1,23 @@
 # academia-java-api
-Projeto para ensinar APIs Java com Spring Boot
+A project to teach REST APIs with Java and Spring Boot
+
+# The Academy
+We are going to build a Customer REST API in order to provide a CRUD (Create, Read, Update, Delete) to manage Customer's data. 
+
+There will be a Swagger Proof provided in the base project.
+
+# The Challenge
+The base project has an error. There will be a prize to those who identify, solve and send a PR (Pull Reques) to the base project.
+
+# Concepts
+- What is a REST API?
+Is an application that uses the HTTP protocol to communicate and expose system data.
+
+- Why should we use a REST API?
+In order to provide communication and integration between systems.
+
+- How can we implement a REST API?
+There are many ways to do this. In Santander we have been using Java and Spring Boot framework. 
 
 # Session 1
 
