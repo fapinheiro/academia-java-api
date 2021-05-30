@@ -20,8 +20,6 @@ In order to provide communication and integration between systems.
 There are many ways to do this. In Santander we have been using Java and Spring Boot framework. 
 
 # Session 1
-
-Configuração do Workspace:
 - [JDK 11](https://jdk.java.net/archive/)
 - [IntelliJ Community](https://www.jetbrains.com/idea/download/#section=windows)
 - [Maven](https://mirrors.up.pt/pub/apache/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.zip)
@@ -41,9 +39,20 @@ Configuração do Workspace:
 - Add as Maven project
 - Hello world controller
 - Understanding the Swagger contract
+:warning Deactivate CORS in Chrome. Stop all running chrome.exe and then in a terminal:
+```
+Right click on desktop, add new shortcut.
+Add the target as "[PATH_TO_CHROME]\chrome.exe" --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp.
+Click OK.
+```
 
 # References
 
+## HTTP methods
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+
+## HTTP status
+https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 
 
 

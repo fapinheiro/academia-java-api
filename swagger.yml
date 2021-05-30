@@ -1,0 +1,190 @@
+swagger: "2.0"
+info:
+  description: "A Customers REST API to provide CRUD integration"
+  version: "1.0.0"
+  title: ""
+  contact:
+    email: "filipe.alves.pinheiro@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8089"
+basePath: "/customers/api/v1"
+tags:
+  - name: "customers"
+    description: "A resource to manage customers"
+  - name: "hello"
+    description: "A resource to test the hello world"
+schemes:
+  - "http"
+paths:
+  /hello:
+    get:
+      tags:
+        - "hello"
+      summary: "Hello world test"
+      operationId: "helloWorld"
+      consumes:
+        - "application/text"
+      produces:
+        - "application/text"
+      responses:
+        "200":
+          description: "Hello world message"
+
+  /customers:
+    get:
+      tags:
+        - "customers"
+      summary: "A resource to search for customers"
+      description: "Return a customer by name and/or nif. Otherwise return all"
+      operationId: "getCustomers"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "query"
+          type: string
+          name: "name"
+          description: "Filter by name"
+          required: false
+        - in: "query"
+          type: string
+          name: "nif"
+          description: "Filter by nif"
+          required: false
+      responses:
+        "200":
+          description: "Success"
+        "404":
+          description: "Customer not found"
+        "400":
+          description: "Invalid parameter"
+        "500":
+          description: "Internal error"
+
+    post:
+      tags:
+        - "customers"
+      summary: "A resource to create a new customer"
+      description: "Create a new customer and return the customer ID"
+      operationId: "createCustomer"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Customer data to be created"
+          required: true
+          schema:
+            $ref: "#/definitions/CustomerRequest"
+      responses:
+        "200":
+          description: "Success"
+          schema:
+            $ref: '#/definitions/CustomerResponse'
+        "400":
+          description: "Invalid parameter"
+        "500":
+          description: "Internal error"
+
+  /customers/{id}:
+    put:
+      tags:
+        - "customers"
+      summary: "A resource to update a customer"
+      operationId: "updateCustomer"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          type: integer
+          name: "id"
+          description: "Customer ID"
+          required: true
+        - in: "body"
+          name: "body"
+          description: "The customer data to be updated"
+          required: true
+          schema:
+            $ref: "#/definitions/CustomerRequest"
+      responses:
+        "200":
+          description: "Success"
+          schema:
+            $ref: "#/definitions/CustomerResponse"
+        "400":
+          description: "Invalid parameter"
+        "404":
+          description: "Customer not found"
+        "500":
+          description: "Internal error"
+
+    delete:
+      tags:
+        - "customers"
+      summary: "A resource to deactivate a customer"
+      operationId: "deactivateCustomer"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          type: integer
+          name: "id"
+          description: "Customer ID"
+          required: true
+      responses:
+        "200":
+          description: "Success"
+        "404":
+          description: "Customer not found"
+        "500":
+          description: "Internal error"
+
+definitions:
+  CustomerRequest:
+    type: "object"
+    required:
+      - "name"
+      - "nif"
+      - "email"
+    properties:
+      name:
+        type: string
+        description: "Customer's name"
+      nif:
+        type: string
+        description: "Customer's nif"
+      email:
+        type: string
+        description: "Customer's email"
+
+  CustomerResponse:
+    type: "object"
+    properties:
+      id:
+        type: integer
+        description: "Customers' ID"
+      name:
+        type: string
+        description: "Customer's name"
+      nif:
+        type: string
+        description: "Customer's nif"
+      email:
+        type: string
+        description: "Customer's email"
+      active:
+        type: boolean
+        description: "Customer's status"
+
+externalDocs:
+  description: "Use Cases"
+  url: "http://sbcs.confluence"
