@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: "A Customers REST API to provide CRUD integration"
   version: "1.0.0"
-  title: ""
+  title: "Customer API"
   contact:
     email: "filipe.alves.pinheiro@gmail.com"
   license:
@@ -37,7 +37,7 @@ paths:
       tags:
         - "customers"
       summary: "A resource to search for customers"
-      description: "Return a customer by name and/or nif. Otherwise return all"
+      description: "Return activated customers by name and/or nif. If name and nif is empty return all activated customers"
       operationId: "getCustomers"
       consumes:
         - "application/json"
@@ -57,10 +57,10 @@ paths:
       responses:
         "200":
           description: "Success"
+          schema:
+            $ref: '#/definitions/ArrayOfCustomer'
         "404":
           description: "Customer not found"
-        "400":
-          description: "Invalid parameter"
         "500":
           description: "Internal error"
 
@@ -149,6 +149,7 @@ paths:
           description: "Internal error"
 
 definitions:
+
   CustomerRequest:
     type: "object"
     required:
@@ -184,6 +185,11 @@ definitions:
       active:
         type: boolean
         description: "Customer's status"
+
+  ArrayOfCustomer:
+    type: array
+    items:
+      $ref: "#/definitions/CustomerResponse"
 
 externalDocs:
   description: "Use Cases"

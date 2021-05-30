@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "d010c8f7-91aa-4ded-a3b4-bf57fbfa4f80",
+		"name": "Customer API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get customers by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8089/customers/api/v1/customers?name=filipe",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"customers",
+						"api",
+						"v1",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "filipe"
+						},
+						{
+							"key": "nif",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get customers by nif",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8089/customers/api/v1/customers?nif=298973534",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"customers",
+						"api",
+						"v1",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "nif",
+							"value": "298973534"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

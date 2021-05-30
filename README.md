@@ -22,7 +22,9 @@ There are many ways to do this. In Santander we have been using Java and Spring 
 # Session 1
 - [JDK 11](https://jdk.java.net/archive/)
 - [IntelliJ Community](https://www.jetbrains.com/idea/download/#section=windows)
+- [Lombok Plugin](https://projectlombok.org/setup/intellij)
 - [Maven](https://mirrors.up.pt/pub/apache/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.zip)
+- [Postman](https://www.postman.com/downloads/)
 - Create Github account and project
 - Clone Github project
 - [SpringBoot Initializer](https://start.spring.io/)
@@ -46,6 +48,14 @@ Add the target as "[PATH_TO_CHROME]\chrome.exe" --disable-web-security --disable
 Click OK.
 ```
 
+# Session 3
+- Implement GET /customers controller
+- The DTO pattern
+- The service interface and its implementation
+- The repository and its entities
+- The ORM mapping
+- Create Postman collection 
+
 # References
 
 ## HTTP methods
@@ -53,6 +63,15 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
 
 ## HTTP status
 https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+
+## JPA X ORM X HIBERNATE
+https://stackoverflow.com/questions/27462185/jpa-vs-orm-vs-hibernate
+
+## Repository types
+https://www.baeldung.com/spring-data-repositories
+
+## Repository query
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
 
 
 
