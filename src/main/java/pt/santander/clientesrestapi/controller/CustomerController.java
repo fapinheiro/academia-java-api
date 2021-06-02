@@ -49,4 +49,10 @@ public class CustomerController {
         customerServ.deleteCustomer(id);
         return ResponseEntity.status(200).build();
     }
+
+    @GetMapping("/customers/emailGroup")
+    public ResponseEntity<List<CustomerResponse>> getCustomerByEmailGroup(
+            @RequestParam String group) throws Exception {
+        return ResponseEntity.ok(customerServ.getCustomersByEmailGroup(group));
+    }
 }

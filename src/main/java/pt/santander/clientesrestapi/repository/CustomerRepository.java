@@ -1,5 +1,6 @@
 package pt.santander.clientesrestapi.repository;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import pt.santander.clientesrestapi.entity.Customer;
@@ -17,5 +18,11 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer> {
     List<Customer> findByActiveAndNif(Boolean active, String nif);
     List<Customer> findByActiveAndNifAndNameContaining(Boolean Active, String nif, String name);
     List<Customer> findByActive(Boolean Active);
+
+    @Query(nativeQuery = true,
+        value = "select * from customers where email like ?1"
+    )
+    List<Customer> findByEmailGroup(String group);
+
 
 }
