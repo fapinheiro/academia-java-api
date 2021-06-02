@@ -1,8 +1,12 @@
 package pt.santander.clientesrestapi.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import pt.santander.clientesrestapi.dto.CustomerRequest;
 import pt.santander.clientesrestapi.dto.CustomerResponse;
+import pt.santander.clientesrestapi.entity.Customer;
 import pt.santander.clientesrestapi.repository.CustomerRepository;
 import pt.santander.clientesrestapi.service.CustomerService;
 
@@ -87,5 +91,55 @@ public class CustomerServiceDataBaseImpl implements CustomerService {
             );
         }
         return customers;
+    }
+
+    @Override
+    public CustomerResponse createCustomer(CustomerRequest request) throws Exception {
+        // Convert dto to entity and save
+        Customer customerNew = customerRep.save(
+                Customer.builder()
+                        .name(request.getName())
+                        .email(request.getEmail())
+                        .nif(request.getNif())
+                        .active(true)
+                        .build()
+        );
+        // Convert entity to dto and return
+        return CustomerResponse.builder()
+                .id(customerNew.getId())
+                .name(customerNew.getName())
+                .nif(customerNew.getNif())
+                .email(customerNew.getEmail())
+                .active(customerNew.getActive())
+                .build();
+    }
+
+    @Override
+    public CustomerResponse updateCustomer(Integer id, CustomerRequest request) throws Exception {
+        Customer customerUpdated = customerRep.findById(id)
+                .map( customer -> {
+                    customer.setEmail(request.getEmail());
+                    customer.setName(request.getName());
+                    customer.setNif(request.getNif());
+                    return customerRep.save(customer);
+                })
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "CUSTOMER NOT FOUND"));
+        return CustomerResponse.builder()
+                .id(customerUpdated.getId())
+                .name(customerUpdated.getName())
+                .nif(customerUpdated.getNif())
+                .email(customerUpdated.getEmail())
+                .active(customerUpdated.getActive())
+                .build();
+    }
+
+    @Override
+    public void deleteCustomer(Integer id) throws Exception {
+        customerRep.findById(id)
+                .map( customer -> {
+                    customer.setActive(false);
+                    return customerRep.save(customer);
+                })
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "CUSTOMER NOT FOUND"));
     }
 }

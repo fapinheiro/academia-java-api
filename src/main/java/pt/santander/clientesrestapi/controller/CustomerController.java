@@ -3,12 +3,12 @@ package pt.santander.clientesrestapi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pt.santander.clientesrestapi.dto.CustomerRequest;
 import pt.santander.clientesrestapi.dto.CustomerResponse;
 import pt.santander.clientesrestapi.service.CustomerService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -32,5 +32,21 @@ public class CustomerController {
         } else {
             return ResponseEntity.status(404).build();
         }
+    }
+
+    @PostMapping("/customers")
+    public CustomerResponse createCustomer(@Valid @RequestBody CustomerRequest request) throws Exception {
+        return customerServ.createCustomer(request);
+    }
+
+    @PutMapping("/customers/{id}")
+    public CustomerResponse updateCustomer(@PathVariable Integer id, @Valid @RequestBody CustomerRequest request) throws Exception {
+        return customerServ.updateCustomer(id, request);
+    }
+
+    @DeleteMapping("/customers/{id}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Integer id) throws Exception {
+        customerServ.deleteCustomer(id);
+        return ResponseEntity.status(200).build();
     }
 }

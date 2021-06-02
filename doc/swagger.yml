@@ -96,6 +96,7 @@ paths:
       tags:
         - "customers"
       summary: "A resource to update a customer"
+      description: "Allow to update all info, except the ID."
       operationId: "updateCustomer"
       consumes:
         - "application/json"

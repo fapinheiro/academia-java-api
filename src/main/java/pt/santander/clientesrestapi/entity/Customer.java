@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -17,10 +18,11 @@ import javax.validation.constraints.Size;
 @Data
 @Entity
 @Table(name = "customers")
+@SequenceGenerator(sequenceName = "seq_customers", name="seq_customers")
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "seq_customers")
     //@Column(name = "id")
     private Integer id;
 

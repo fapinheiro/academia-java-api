@@ -54,7 +54,23 @@ Click OK.
 - The service interface and its implementation
 - The repository and its entities
 - The ORM mapping
-- Create Postman collection 
+- Create Postman collection
+
+# Session 4
+- Implement POST /customers controller 
+-- @Email
+-- Why dto to entity and vice-versa? Answer: encapsulation, dynamic responses, etc.
+- Implement PUT /customers controller
+- Implement DELETE /customers controller
+- Explore Query native and JPA
+
+# Session 5
+- JUnit test
+- Project Build with Maven
+- Security
+
+# Session 6
+- The Challenge
 
 # References
 

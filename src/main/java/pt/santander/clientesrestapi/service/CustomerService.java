@@ -1,5 +1,6 @@
 package pt.santander.clientesrestapi.service;
 
+import pt.santander.clientesrestapi.dto.CustomerRequest;
 import pt.santander.clientesrestapi.dto.CustomerResponse;
 
 import java.util.List;
@@ -10,4 +11,7 @@ import java.util.List;
  */
 public interface CustomerService {
        public List<CustomerResponse> getCustomers(String name, String nif) throws Exception;
+       public CustomerResponse createCustomer(CustomerRequest request) throws Exception;
+       public CustomerResponse updateCustomer(Integer id, CustomerRequest request) throws Exception;
+       public void deleteCustomer(Integer id) throws Exception;
 }

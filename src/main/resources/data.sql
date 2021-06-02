@@ -1,6 +1,6 @@
-insert into customers (name, nif, email, active)
-values ('filipe pinheiro', '298973533', 'filipe@gmail.com', 'T');
-insert into customers (name, nif, email, active)
-values ('barbara pinheiro', '298973534', 'barbara@gmail.com', 'T');
-insert into customers (name, nif, email, active)
-values ('sarah pinheiro', '298973535', 'sarah@gmail.com', 'F');
+insert into customers (id, name, nif, email, active)
+values (seq_customers.nextval, 'filipe pinheiro', '298973533', 'filipe@gmail.com', 'T');
+insert into customers (id, name, nif, email, active)
+values (seq_customers.nextval, 'barbara pinheiro', '298973534', 'barbara@gmail.com', 'T');
+insert into customers (id, name, nif, email, active)
+values (seq_customers.nextval, 'sarah pinheiro', '298973535', 'sarah@gmail.com', 'F');
