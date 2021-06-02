@@ -63,11 +63,12 @@ Click OK.
 - Implement PUT /customers controller
 - Implement DELETE /customers controller
 - Explore Query native and JPA
+- A conversation about Spring Security
 
 # Session 5
 - JUnit test
 - Project Build with Maven
-- Security
+- Git feature, merge, etc..
 
 # Session 6
 - The Challenge
