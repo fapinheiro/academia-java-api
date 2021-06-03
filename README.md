@@ -90,6 +90,9 @@ https://www.baeldung.com/spring-data-repositories
 ## Repository query
 https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
 
+## JSON to Java Class (vice-versa)
+https://www.baeldung.com/jackson-collection-array
+
 
 
 
