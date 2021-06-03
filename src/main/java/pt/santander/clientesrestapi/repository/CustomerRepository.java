@@ -19,10 +19,4 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer> {
     List<Customer> findByActiveAndNifAndNameContaining(Boolean Active, String nif, String name);
     List<Customer> findByActive(Boolean Active);
 
-    @Query(nativeQuery = true,
-        value = "select * from customers where email like ?1"
-    )
-    List<Customer> findByEmailGroup(String group);
-
-
 }

@@ -59,24 +59,9 @@ public class CustomerServiceDataBaseImpl implements CustomerService {
                     })
                     .collect(Collectors.toList())
             );
-        } else if (nif != null) {
+        } else if (nif == null) {
             // Search by nif, apply conversion, normalize and add to the list
             customers.addAll(customerRep.findByActiveAndNif( true, nif)
-                    .stream()
-                    .map( customer -> {
-                        return CustomerResponse.builder()
-                                .id(customer.getId())
-                                .name(customer.getName())
-                                .nif(customer.getNif())
-                                .email(customer.getEmail())
-                                .active(customer.getActive())
-                                .build();
-                    })
-                    .collect(Collectors.toList())
-            );
-        } else {
-            // Search by active, apply conversion, normalize and add to the list
-            customers.addAll(customerRep.findByActive(true)
                     .stream()
                     .map( customer -> {
                         return CustomerResponse.builder()
@@ -143,24 +128,4 @@ public class CustomerServiceDataBaseImpl implements CustomerService {
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "CUSTOMER NOT FOUND"));
     }
 
-    @Override
-    public List<CustomerResponse> getCustomersByEmailGroup(String group) throws Exception {
-        List<CustomerResponse> list = new ArrayList<>();
-        group = "%" + group + "%";
-        customerRep.findByEmailGroup(group)
-            .forEach(
-                    customer -> {
-                        list.add(
-                                CustomerResponse.builder()
-                                        .id(customer.getId())
-                                        .name(customer.getName())
-                                        .nif(customer.getNif())
-                                        .email(customer.getEmail())
-                                        .active(customer.getActive())
-                                        .build()
-                        );
-                    }
-            );
-        return list;
-    }
 }

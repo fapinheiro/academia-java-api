@@ -47,12 +47,7 @@ public class CustomerController {
     @DeleteMapping("/customers/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable Integer id) throws Exception {
         customerServ.deleteCustomer(id);
-        return ResponseEntity.status(200).build();
+        return ResponseEntity.status(201).build();
     }
 
-    @GetMapping("/customers/emailGroup")
-    public ResponseEntity<List<CustomerResponse>> getCustomerByEmailGroup(
-            @RequestParam String group) throws Exception {
-        return ResponseEntity.ok(customerServ.getCustomersByEmailGroup(group));
-    }
 }

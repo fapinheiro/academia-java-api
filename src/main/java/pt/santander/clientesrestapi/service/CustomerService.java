@@ -14,5 +14,4 @@ public interface CustomerService {
        public CustomerResponse createCustomer(CustomerRequest request) throws Exception;
        public CustomerResponse updateCustomer(Integer id, CustomerRequest request) throws Exception;
        public void deleteCustomer(Integer id) throws Exception;
-       public List<CustomerResponse> getCustomersByEmailGroup(String group) throws Exception;
 }
