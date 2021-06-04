@@ -71,7 +71,7 @@ Click OK.
 - Git feature, merge, etc..
 
 # Session 6
-- The Challenge Matilde
+- The Challenge Matilde Lucas
 
 # References
 
