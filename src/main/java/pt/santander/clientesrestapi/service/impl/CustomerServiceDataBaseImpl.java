@@ -25,6 +25,7 @@ public class CustomerServiceDataBaseImpl implements CustomerService {
 
     @Override
     public List<CustomerResponse> getCustomers(String name, String nif) throws Exception {
+        System.out.println("NIF being searched: "+nif);
         List<CustomerResponse> customers = new ArrayList<>();
         if (name != null && nif != null) {
 
@@ -59,7 +60,7 @@ public class CustomerServiceDataBaseImpl implements CustomerService {
                     })
                     .collect(Collectors.toList())
             );
-        } else if (nif == null) {
+        } else if (nif != null) {
             // Search by nif, apply conversion, normalize and add to the list
             customers.addAll(customerRep.findByActiveAndNif( true, nif)
                     .stream()
