@@ -75,6 +75,18 @@ public class CustomerServiceDataBaseImpl implements CustomerService {
                     })
                     .collect(Collectors.toList())
             );
+        } else {
+            customers = customerRep.findByActive(true)
+                    .stream()
+                    .map( customer -> {
+                        return CustomerResponse.builder()
+                                .id(customer.getId())
+                                .name(customer.getName())
+                                .nif(customer.getNif())
+                                .email(customer.getEmail())
+                                .active(customer.getActive())
+                                .build();
+                    }).collect(Collectors.toList());
         }
         return customers;
     }
