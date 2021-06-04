@@ -82,6 +82,7 @@ class ClientesRestApiApplicationTests {
 		ObjectMapper mapper = new ObjectMapper();
 		List<CustomerResponse> customers = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<CustomerResponse>>(){});
 		assertThat(customers).isNotEmpty();
+		assertThat(customers).hasSize(1);
 		assertThat(customers.get(0).getNif().equals("298973534"));
 
 	}
@@ -100,6 +101,7 @@ class ClientesRestApiApplicationTests {
 		ObjectMapper mapper = new ObjectMapper();
 		List<CustomerResponse> customers = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<CustomerResponse>>(){});
 		assertThat(customers).isNotEmpty();
+		assertThat(customers).hasSize(1);
 		assertThat(customers.get(0).getName()).contains("filipe");
 		assertThat(customers.get(0).getNif().equals("298973533"));
 
@@ -233,7 +235,7 @@ class ClientesRestApiApplicationTests {
 	}
 
 	@Test
-	void shouldReturnNotfoundCustomerWhenUpdating() throws Exception {
+	void shouldReturnNotFoundCustomerWhenUpdating() throws Exception {
 
 		String body = "{\n" +
 				"    \"name\" : \"duarte pinheiro\",\n" +

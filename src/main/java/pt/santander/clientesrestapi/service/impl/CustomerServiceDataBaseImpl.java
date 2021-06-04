@@ -25,7 +25,6 @@ public class CustomerServiceDataBaseImpl implements CustomerService {
 
     @Override
     public List<CustomerResponse> getCustomers(String name, String nif) throws Exception {
-        System.out.println("NIF being searched: "+nif);
         List<CustomerResponse> customers = new ArrayList<>();
         if (name != null && nif != null) {
 
