@@ -124,8 +124,20 @@ class ClientesRestApiApplicationTests {
 				"    \"email\" : \"jessica@gmail.com\"\n" +
 				"}";
 
-		mockMvc.perform(post("/customers").header("Content-Type", "application/json").content(body))
-				.andExpect(status().isOk());
+		MvcResult mvcResult = mockMvc.perform(post("/customers")
+				.header("Content-Type", "application/json")
+				.content(body))
+				.andExpect(status().isOk())
+				.andReturn();
+
+		ObjectMapper mapper = new ObjectMapper();
+		CustomerResponse customer = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<CustomerResponse>(){});
+
+		assertThat(customer.getName()).isEqualTo("jessica pinheiro");
+		assertThat(customer.getNif()).isEqualTo("298973537");
+		assertThat(customer.getEmail()).isEqualTo("jessica@gmail.com");
+		assertThat(customer.getActive()).isEqualTo(true);
+
 	}
 
 	@Test
