@@ -47,7 +47,7 @@ public class CustomerController {
     @DeleteMapping("/customers/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable Integer id) throws Exception {
         customerServ.deleteCustomer(id);
-        return ResponseEntity.status(201).build();
+        return ResponseEntity.status(200).build();
     }
 
 }
