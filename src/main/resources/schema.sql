@@ -9,3 +9,5 @@ create table if not exists customers (
 -- SEQUENCE
 create sequence if not exists seq_customers start with 1 increment by 50 maxvalue 99999999;
 
+-- CONSTRAINT
+alter table customers add constraint clients_nif_unique unique(nif);

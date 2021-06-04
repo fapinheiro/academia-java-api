@@ -66,7 +66,9 @@ class ClientesRestApiApplicationTests {
 		ObjectMapper mapper = new ObjectMapper();
 		List<CustomerResponse> customers = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<CustomerResponse>>(){});
 		assertThat(customers).isNotEmpty();
-		assertThat(customers.get(0).getName()).contains("filipe");
+		for(int i=0; i<customers.size(); i++){
+			assertThat(customers.get(i).getName()).contains("filipe");
+		}
 
 	}
 
@@ -82,7 +84,7 @@ class ClientesRestApiApplicationTests {
 		ObjectMapper mapper = new ObjectMapper();
 		List<CustomerResponse> customers = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<CustomerResponse>>(){});
 		assertThat(customers).isNotEmpty();
-		assertThat(customers.get(0).getNif().equals("298973534"));
+		assertThat(customers.get(0).getNif()).isEqualTo("298973534");
 
 	}
 
@@ -101,7 +103,7 @@ class ClientesRestApiApplicationTests {
 		List<CustomerResponse> customers = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<CustomerResponse>>(){});
 		assertThat(customers).isNotEmpty();
 		assertThat(customers.get(0).getName()).contains("filipe");
-		assertThat(customers.get(0).getNif().equals("298973533"));
+		assertThat(customers.get(0).getNif()).isEqualTo("298973533");
 
 	}
 
@@ -124,8 +126,19 @@ class ClientesRestApiApplicationTests {
 				"    \"email\" : \"jessica@gmail.com\"\n" +
 				"}";
 
-		mockMvc.perform(post("/customers").header("Content-Type", "application/json").content(body))
-				.andExpect(status().isOk());
+		// Make request
+		MvcResult mvcResult = mockMvc.perform(post("/customers").header("Content-Type", "application/json").content(body))
+				.andExpect(status().isOk())
+				.andReturn();
+
+		// Mapping json to class
+		ObjectMapper mapper = new ObjectMapper();
+		CustomerResponse customerNew = mapper.readValue(mvcResult.getResponse().getContentAsString(), CustomerResponse.class);
+		assertThat(customerNew).isNotNull();
+		assertThat(customerNew.getId()).isPositive();
+		assertThat(customerNew.getName()).isEqualTo("jessica pinheiro");
+		assertThat(customerNew.getNif()).isEqualTo("298973537");
+		assertThat(customerNew.getEmail()).isEqualTo("jessica@gmail.com");
 	}
 
 	@Test
@@ -137,11 +150,15 @@ class ClientesRestApiApplicationTests {
 				"    \"email\" : \"jessica@gmail.com\"\n" +
 				"}";
 
-		mockMvc.perform(post("/customers").header("Content-Type", "application/json").content(body))
+		mockMvc.perform(post("/customers")
+				.header("Content-Type", "application/json")
+				.content(body))
 				.andExpect(status().isOk());
 
 		try {
-			mockMvc.perform(post("/customers").header("Content-Type", "application/json").content(body))
+			mockMvc.perform(post("/customers")
+					.header("Content-Type", "application/json")
+					.content(body))
 				.andExpect(status().isInternalServerError());
 		} catch (Exception e) {
 			assertThat(e).hasCauseInstanceOf(DataIntegrityViolationException.class);
@@ -196,7 +213,9 @@ class ClientesRestApiApplicationTests {
 				"}";
 
 		// Make request
-		MvcResult mvcResult = mockMvc.perform(post("/customers").header("Content-Type", "application/json").content(body))
+		MvcResult mvcResult = mockMvc.perform(post("/customers")
+				.header("Content-Type", "application/json")
+				.content(body))
 				.andExpect(status().isOk())
 				.andReturn();
 
@@ -217,7 +236,8 @@ class ClientesRestApiApplicationTests {
 				"}";
 
 		// Make request
-		mvcResult = mockMvc.perform(put("/customers/" + customerNew.getId()).header("Content-Type", "application/json").content(body))
+		mvcResult = mockMvc.perform(put("/customers/" + customerNew.getId())
+				.header("Content-Type", "application/json").content(body))
 				.andExpect(status().isOk())
 				.andReturn();
 
@@ -314,7 +334,8 @@ class ClientesRestApiApplicationTests {
 				"}";
 
 		// Make request
-		mockMvc.perform(put("/customers/" + customerNew.getId()).header("Content-Type", "application/json").content(body))
+		mockMvc.perform(put("/customers/" + customerNew.getId())
+				.header("Content-Type", "application/json").content(body))
 				.andExpect(status().isBadRequest());
 
 	}
