@@ -20,6 +20,7 @@ public class CustomerRequest {
     @NotEmpty
     private String nif;
 
+    @NotNull
     @Email
     private String email;
 
