@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import pt.santander.clientesrestapi.dto.CustomerRequest;
 import pt.santander.clientesrestapi.dto.CustomerResponse;
 import pt.santander.clientesrestapi.repository.CustomerRepository;
 
@@ -66,7 +67,8 @@ class ClientesRestApiApplicationTests {
 		ObjectMapper mapper = new ObjectMapper();
 		List<CustomerResponse> customers = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<CustomerResponse>>(){});
 		assertThat(customers).isNotEmpty();
-		assertThat(customers.get(0).getName()).contains("filipe");
+		for(CustomerResponse customer : customers)
+			assertThat(customer.getName()).contains("filipe");
 
 	}
 
