@@ -71,7 +71,7 @@ Click OK.
 - Git feature, merge, etc..
 
 # Session 6
-- The Challenge Duarte
+- The Challenge Duarte Sequeira
 
 
 # References
