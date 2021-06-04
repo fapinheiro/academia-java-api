@@ -59,7 +59,7 @@ public class CustomerServiceDataBaseImpl implements CustomerService {
                     })
                     .collect(Collectors.toList())
             );
-        } else if (nif == null) {
+        } else if (nif != null) {
             // Search by nif, apply conversion, normalize and add to the list
             customers.addAll(customerRep.findByActiveAndNif( true, nif)
                     .stream()
@@ -73,6 +73,21 @@ public class CustomerServiceDataBaseImpl implements CustomerService {
                                 .build();
                     })
                     .collect(Collectors.toList())
+            );
+        }
+        else {
+            customerRep.findAll().forEach(
+                    customer -> {
+                        customers.add(
+                                CustomerResponse.builder()
+                                    .id(customer.getId())
+                                    .name(customer.getName())
+                                    .nif(customer.getNif())
+                                    .email(customer.getEmail())
+                                    .active(customer.getActive())
+                                    .build()
+                        );
+                    }
             );
         }
         return customers;
